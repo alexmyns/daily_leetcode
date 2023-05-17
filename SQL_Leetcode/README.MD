@@ -1,10 +1,13 @@
 | Leetcode      | Description | Author |
 | ----------- | ----------- | ------------ |
-| [Easy 🟩](https://leetcode.com/problemset/database/) | Solved Nums | `Alex Myn` |
-| [Medium  🟨](https://leetcode.com/problemset/database/)  | Solved Nums | `16/05/23` |
-| [Hard 🟥](https://leetcode.com/problemset/database/) | Solved Nums | alixan.me@yandex.com |
+| [Easy 🟩](https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_easy.MD) | Solved Nums | `Alex Myn` |
+| [Medium  🟨](https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_medium.MD)  | Solved Nums | `16/05/23` |
+| [Hard 🟥](https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_hard.MD) | Solved Nums | alixan.me@yandex.com |
     
+-----
     
+## <a href = 'https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_easy.MD'>SQL Hard question</a>
+
 | Easy  🟩    | Description |
 | ----------- | ----------- |
 | 175. Combine Two Tables | [link](https://leetcode.com/problems/combine-two-tables/) |  
@@ -59,3 +62,13 @@
 | 1965. Employees With Missing Information | [link](https://leetcode.com/problems/employees-with-missing-information/) |
 | 1978. Employees Whose Manager Left the Company | [link](https://leetcode.com/problems/employees-whose-manager-left-the-company/) |
 | 2356. Number of Unique Subjects Taught by Each Teacher | [link](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/) |
+
+
+--------
+## <a href = 'https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_hard.MD'>SQL Hard question</a>
+
+| Hard  🟥    | Description |
+|------------ | -------------|
+| 185. Department Top Three Salaries | [link](https://leetcode.com/problems/department-top-three-salaries/) |
+| 262. Trips and Users | [link](https://leetcode.com/problems/trips-and-users/) |
+| 601. Human Traffic of Stadium | [link](https://leetcode.com/problems/human-traffic-of-stadium/) |
