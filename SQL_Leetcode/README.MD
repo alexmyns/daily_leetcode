@@ -35,4 +35,27 @@
 | 1251. Average Selling Price | [link](https://leetcode.com/problems/average-selling-price/) |
 | 1280. Students and Examinations | [link](https://leetcode.com/problems/students-and-examinations/) |
 | 1327. List the Products Ordered in a Period | [link](https://leetcode.com/problems/list-the-products-ordered-in-a-period/) |
-
+| 1378. Replace Employee ID With The Unique Identifier | [link](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/) |
+| 1407. Top Travellers | [link](https://leetcode.com/problems/top-travellers/) |
+| 1484. Group Sold Products By The Date | [link](https://leetcode.com/problems/group-sold-products-by-the-date/) |
+| 1517. Find Users With Valid E-Mails | [link](https://leetcode.com/problems/find-users-with-valid-e-mails/) |
+| 1527. Patients With a Condition | [link](https://leetcode.com/problems/patients-with-a-condition/) |
+| 1581. Customer Who Visited but Did Not Make Any Transactions | [link](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/) |
+| 1587. Bank Account Summary II | [link](https://leetcode.com/problems/bank-account-summary-ii/) |
+| 1633. Percentage of Users Attended a Contest | [link](https://leetcode.com/problems/percentage-of-users-attended-a-contest/) |
+| 1661. Average Time of Process per Machine | [link](https://leetcode.com/problems/average-time-of-process-per-machine/) |
+| 1661. Average Time of Process per Machine | [link](https://leetcode.com/problems/average-time-of-process-per-machine/) |
+| 1667. Fix Names in a Table | [link](https://leetcode.com/problems/fix-names-in-a-table) |
+| 1683. Invalid Tweets | [link](https://leetcode.com/problems/invalid-tweets/) |
+| 1693. Daily Leads and Partners | [link](https://leetcode.com/problems/daily-leads-and-partners/) |
+| 1729. Find Followers Count | [link](https://leetcode.com/problems/find-followers-count/) |
+| 1731. The Number of Employees Which Report to Each Employee | [link](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/) |
+| 1741. Find Total Time Spent by Each Employee | [link](https://leetcode.com/problems/find-total-time-spent-by-each-employee/) |
+| 1757. Recyclable and Low Fat Products | [link](https://leetcode.com/problems/recyclable-and-low-fat-products/) |
+| 1789. Primary Department for Each Employee | https://leetcode.com/problems/primary-department-for-each-employee |
+| 1795. Rearrange Products Table | [link](https://leetcode.com/problems/rearrange-products-table/   ) |
+| 1873. Calculate Special Bonus | [link](https://leetcode.com/problems/calculate-special-bonus/) |
+| 1890. The Latest Login in 2020 | [link](https://leetcode.com/problems/the-latest-login-in-2020/) |
+| 1965. Employees With Missing Information | [link](https://leetcode.com/problems/employees-with-missing-information/) |
+| 1978. Employees Whose Manager Left the Company | [link](https://leetcode.com/problems/employees-whose-manager-left-the-company/) |
+| 2356. Number of Unique Subjects Taught by Each Teacher | [link](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/) |

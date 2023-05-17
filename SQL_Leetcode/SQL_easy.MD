@@ -292,128 +292,99 @@ ORDER BY student_id, subject_name
 1327. List the Products Ordered in a Period
 
 ```sql
-select question_id as survey_log
-from
-    (
-    select question_id, count(answer_id)/count(question_id) as rate
-    from survey_log
-    group by question_id
-    order by rate desc
-    limit 1
-    ) a
+SELECT a.product_name, SUM(b.unit) as unit
+FROM Products as a
+RIGHT JOIN Orders as b
+ON a.product_id = b.product_id
+WHERE MONTH(b.order_date)=2 AND YEAR(b.order_date)=2020
+GROUP BY a.product_name
+HAVING unit >= 100
 ```
 
-614. Second Degree Follower
+1378. Replace Employee ID With The Unique Identifier
 
 ```sql
-select f1.follower, count(distinct f2.follower) as num
-from follow f1
-join follow f2
-on f1.follower = f2.followee
-group by f1.follower
-order by f1.follower, num desc
+select unique_id, name
+from employees as emp
+left join employeeUNI as uni
+on uni.id = emp.id
 ```
-618. Students Report By Geography
+
+1407. Top Travellers
 
 ```sql
-set @r1 = 0;
-set @r2 = 0;
-set @r3 = 0;
-
-select
-America.name as America, Asia.name as Asia, Europe.name as Europe
-from
-(select name, @r1:= @r1+1 as id from student where continent = 'America' order by name) America
-left join
-(select name, @r2:= @r2+1 as id from student where continent = 'Asia' order by name) Asia
-on
-America.id = Asia.id
-left join
-(select name, @r3:= @r3+1 as id from student where continent = 'Europe' order by name) Europe
-on
-America.id = Europe.id
+SELECT name,sum(
+	if(distance is NULL,0,distance)
+	) as travelled_distance
+FROM Users u
+LEFT JOIN Rides r ON u.id=r.user_id
+GROUP BY User_id
+ORDER BY travelled_distance desc,name asc
 ```
 
-571. Find Median Given Frequency of Numbers
+1484. Group Sold Products By The Date
 
 ```sql
-select avg(n1.Number) as median
-from Numbers n1
-where n1.Frequency >= abs(
-    (select sum(n2.Frequency) from Numbers n2 where n1.Number >= n2.Number)
-    -
-    (select sum(n2.Frequency) from Numbers n2 where n1.Number <= n2.Number)
-)
+select 
+sell_date, count(distinct product) as num_sold, 
+group_concat(distinct product) as products 
+from activities 
+group by sell_date;
 ```
 
-178. Rank Scores
+1517. Find Users With Valid E-Mails
 
 ```sql
--- Write your MySQL query statement below
-select s1.Score, 
-(select count(distinct  s2.Score) from Scores s2 where s2.Score >= s1.Score) as Rank
-from Scores s1
-order by s1.Score desc;
+select * from Users 
+where right(mail, 13) like "@leetcode.com"
+and left(mail, length(mail)-13) 
+rlike '^[A-Za-z][A-Za-z0-9._-]*$'
 ```
 
-569. Median Employee Salary
+1527. Patients With a Condition
 
 ```sql
-select e1.*
-from Employee e1, Employee e2
-where e1.Company = e2.Company
-group by e1.Company, e1.Salary
-having sum(case when e1.Salary = e2.Salary then 1 else 0 end)
-    >= abs(sum(sign(e1.Salary-e2.Salary)))
-order by e1.Company, e1.Salary, e1.Id
+select patient_id, patient_name, conditions 
+from patients 
+where conditions 
+like 'DIAB10%' or 
+conditions like '% DIAB10%';
 ```
 
-180. Consecutive Numbers
+1581. Customer Who Visited but Did Not Make Any Transactions
 
 ```sql
--- Write your MySQL query statement below
-select distinct l1.Num as ConsecutiveNums
-from Logs l1, Logs l2, Logs l3
-where l1.ID - 1 = l2.ID
-and l1.ID - 2 = l3.ID
-and l1.Num = l2.Num
-and l1.Num = l3.Num;
+SELECT customer_id, COUNT(Visits.visit_id) AS count_no_trans
+FROM Visits LEFT JOIN Transactions ON Visits.visit_id = Transactions.visit_id
+WHERE transaction_id IS NULL
+GROUP BY customer_id;
 ```
 
-615. Average Salary: Departments VS Company
+1587. Bank Account Summary II
 
 ```sql
-select a.pay_month, a.department_id,
-case when a.avg_mon_dept_amount = b.avg_dept_amount then 'same'
-when a.avg_mon_dept_amount > b.avg_dept_amount then 'higher'
-else 'lower' end as comparison
-from
-(select Date_Format(pay_date, '%Y-%m') as pay_month, department_id, avg(amount) as avg_mon_dept_amount
-from salary s
-join employee e
-on s.employee_id = e.employee_id
-group by pay_month, department_id) a
-join
-(select Date_Format(pay_date, '%Y-%m') as pay_month, avg(amount) as avg_dept_amount
-from salary s
-join employee e
-on s.employee_id = e.employee_id
-group by pay_month) b
-on a.pay_month = b.pay_month
+select name, sum(amount) as balance
+from Transactions as t
+inner join Users as u 
+on t.account = u.account
+group by t.account
+having sum(amount) > 10000
 ```
 
-184. Department Highest Salary
+1633. Percentage of Users Attended a Contest
 
 ```sql
--- Write your MySQL query statement below
-select d.Name as Department, e1.Name as Employee, e1.Salary 
-from Department d, Employee e1
-where d.Id = e1.DepartmentId
-and (DepartmentId, Salary) in
-(select e2.DepartmentId, max(e2.Salary) as max_salary from Employee e2 group by e2.DepartmentId) ;
+SELECT contest_id, (
+    ROUND((COUNT(DISTINCT(user_id)) / (
+        SELECT COUNT(user_name) FROM Users
+    )) * 100 , 2)
+) AS percentage
+FROM Register
+GROUP BY contest_id
+ORDER BY 2 DESC, 1 ASC
 ```
 
-579. Find Cumulative Salary of an Employee
+1661. Average Time of Process per Machine
 
 ```sql
 select e1.Id, e1.Month, sum(e2.Salary) as Salary
@@ -427,59 +398,158 @@ group by e1.Id, e1.Month
 order by e1.Id, e1.Month desc
 ```
 
-177. Nth Highest Salary
+1661. Average Time of Process per Machine
 
 ```sql
-CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
-BEGIN
-  set N = N-1;
-  RETURN (
-      -- Write your MySQL query statement below.
-      select distinct Salary from Employee order by Salary desc limit N,1
-  );
-END
+Not done yet
 ```
 
-601. Human Traffic of Stadium
+1667. Fix Names in a Table
 
 ```sql
--- Write your MySQL query statement below
-SELECT t.* FROM stadium t
-    LEFT JOIN stadium p1 ON t.id - 1 = p1.id
-    LEFT JOIN stadium p2 ON t.id - 2 = p2.id
-    LEFT JOIN stadium n1 ON t.id + 1 = n1.id
-    LEFT JOIN stadium n2 ON t.id + 2 = n2.id
-WHERE (t.people >= 100 AND p1.people >= 100 AND p2.people >= 100)
-     OR (t.people >= 100 AND n1.people >= 100 AND n2.people >= 100)
-     OR (t.people >= 100 AND n1.people >= 100 AND p1.people >= 100)
-ORDER BY id;
+select user_id, CONCAT(UPPER(LEFT(name, 1)), LOWER(RIGHT(name, LENGTH(name) - 1))) as name
+from Users
+order by user_id
 ```
 
-185. Department Top Three Salaries
+1683. Invalid Tweets
 
 ```sql
--- Write your MySQL query statement below
-select d.Name Department, e1.Name Employee, e1.Salary
-from Employee e1 
-join Department d
-on e1.DepartmentId = d.Id
-where 3 > (select count(distinct(e2.Salary)) 
-                  from Employee e2 
-                  where e2.Salary > e1.Salary 
-                  and e1.DepartmentId = e2.DepartmentId);
+select tweet_id
+from Tweets
+where length(content) > 15;
 ```
 
-262. Trips and Users
+1693. Daily Leads and Partners
 
 ```sql
--- Write your MySQL query statement below
+select date_id, make_name, count(distinct lead_id) as unique_leads, count(distinct partner_id) as unique_partners
+from DailySales
+group by date_id, make_name
+```
 
-select Request_at as Day, 
-round(sum(case when Status like 'cancelled_%' then 1 else 0 end) / count(*),2) as 'Cancellation Rate'
-from Trips 
-join Users
-on Users_Id = Client_Id
-where Banned = 'No'
-and Request_at between '2013-10-01' and '2013-10-03'
-group by Request_at;
+1729. Find Followers Count
+
+```sql
+select user_id, count(follower_id) followers_count from followers
+group by user_id
+order by user_id
+```
+
+1731. The Number of Employees Which Report to Each Employee
+
+```sql
+select e1.employee_id, e1.name, count(e2.employee_id) as reports_count, round(avg(e2.age)) as average_age
+from Employees e1, Employees e2
+where e1.employee_id = e2.reports_to
+group by 1
+having reports_count>0
+order by 1
+```
+
+1741. Find Total Time Spent by Each Employee
+
+```sql
+SELECT
+    event_day as day,
+    emp_id,
+    SUM(out_time - in_time) as total_time
+FROM Employees
+GROUP BY event_day, emp_id
+```
+
+1757. Recyclable and Low Fat Products
+
+```sql
+select product_id
+from Products 
+where low_fats  = 'Y' AND recyclable = 'Y';
+```
+
+1789. Primary Department for Each Employee
+
+```sql
+WITH CTE AS(
+SELECT Employee_id, count(department_id) as cnt
+FROM Employee
+GROUP BY employee_id
+)
+
+SELECT employee_id, department_id
+FROM Employee
+WHERE employee_id IN (SELECT Employee_id FROM CTE WHERE cnt = 1)
+UNION
+SELECT employee_id, department_id
+FROM Employee
+WHERE primary_flag = "Y"
+```
+
+1795. Rearrange Products Table
+
+```sql
+select product_id, "store1" as store, store1 as price
+from Products 
+where store1 is not null
+
+union
+
+select product_id, "store2" as store, store2 as price
+from Products 
+where store2 is not null
+
+union
+
+select product_id, "store3" as store, store3 as price
+from Products 
+where store3 is not null
+```
+
+1873. Calculate Special Bonus
+
+```sql
+SELECT employee_id, salary*(employee_id%2)*(name NOT LIKE "M%") as "bonus"
+FROM Employees
+ORDER BY employee_id
+```
+
+1890. The Latest Login in 2020
+
+```sql
+select user_id, max(time_stamp) as last_stamp
+from Logins
+where year(time_stamp) = 2020
+group by user_id;
+```
+
+1965. Employees With Missing Information
+
+```sql
+(SELECT E.employee_id
+FROM Employees E
+LEFT JOIN Salaries S on E.employee_id = S.employee_id
+WHERE S.salary IS NULL
+UNION
+
+SELECT S.employee_id
+FROM Employees E
+RIGHT JOIN Salaries S on E.employee_id = S.employee_id
+WHERE E.name IS NULL)
+ORDER BY employee_id
+```
+
+1978. Employees Whose Manager Left the Company
+
+```sql
+SELECT employee_id
+FROM Employees as a
+WHERE manager_id not in (SELECT employee_id FROM employees) and salary < 30000
+ORDER BY employee_id ASC
+```
+
+2356. Number of Unique Subjects Taught by Each Teacher
+
+```sql
+select teacher_id, count(distinct(subject_id)) as cnt
+from teacher
+group by teacher_id
 ```
