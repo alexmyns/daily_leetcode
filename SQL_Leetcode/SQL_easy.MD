@@ -165,27 +165,22 @@ where mod(id, 2) = 1 and description != 'boring'
 order by rating DESC;
 ```
 
-197. Rising Temperature
+627. Swap Salary
 
 ```sql
--- Write your MySQL query statement below
-select w1.Id
-from Weather w1, Weather w2
-where ( DATEDIFF(w1.Date, w2.Date)=1 )
-and w1.Temperature > w2.Temperature;
+UPDATE salary SET sex = CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END;
 ```
 
-596. Classes More Than 5 Students
+1050. Actors and Directors Who Cooperated At Least Three Times
 
 ```sql
--- Write your MySQL query statement below
-select class 
-from courses 
-group by class 
-having count(distinct student)>=5;
+SELECT actor_id, director_id
+FROM ActorDirector
+GROUP BY actor_id, director_id
+HAVING COUNT(timestamp) >= 3;
 ```
 
-196. Delete Duplicate Emails
+1068. Product Sales Analysis I
 
 ```sql
 -- Write your MySQL query statement below
@@ -195,102 +190,106 @@ where p1.Email = p2.Email
 and p1.Id > p2.Id;
 ```
 
-176. Second Highest Salary
+1075. Project Employees I
 
 ```sql
--- Write your MySQL query statement below
-select
-max(Salary) as SecondHighestSalary
-from Employee 
-where Salary < (select Max(salary) from Employee);
-```
-570. Managers with at Least 5 Direct Reports
-
-```sql
-select Name from Employee
-where Id in (
-select distinct ManagerId
-from Employee
-where ManagerId is not null
-group by ManagerId
-having count(ManagerId) >= 5
-)
+SELECT P.project_id, ROUND((SUM(E.experience_years)/COUNT(E.experience_years)), 2) as average_years
+FROM Employee E
+INNER JOIN Project P USING(employee_id)
+GROUP BY P.project_id
 ```
 
-608. Tree Node
+1084. Sales Analysis III
 
 ```sql
-select id,
-case
-when p_id is null then 'Root'
-when id in (select distinct p_id from tree) then 'Inner'
-else 'Leaf' end as Type
-from tree
+SELECT p.product_id, p.product_name
+FROM Product p
+WHERE product_id in (
+    SELECT product_id
+    FROM Sales
+    GROUP BY 1
+    HAVING MAX(sale_date) <= CAST('2019-03-31' AS DATE)
+    AND MIN(sale_date) >= CAST('2019-01-01' AS DATE)
+);
+```
+
+1141. User Activity for the Past 30 Days I
+
+```sql
+SELECT activity_date as day, COUNT(DISTINCT user_id) as active_users
+FROM Activity
+WHERE datediff('2019-07-27',activity_date)<30 
+AND activity_date <= '2019-07-27' 
+GROUP BY activity_date;
+```
+
+1148. Article Views I
+
+```sql
+select distinct(author_id) as id
+from Views
+where author_id = viewer_id
+order by author_id
+```
+
+1179. Reformat Department Table
+
+```sql
+# Write your MySQL query statement below
+select id, 
+	sum(case when month = 'jan' then revenue else null end) as Jan_Revenue,
+	sum(case when month = 'feb' then revenue else null end) as Feb_Revenue,
+	sum(case when month = 'mar' then revenue else null end) as Mar_Revenue,
+	sum(case when month = 'apr' then revenue else null end) as Apr_Revenue,
+	sum(case when month = 'may' then revenue else null end) as May_Revenue,
+	sum(case when month = 'jun' then revenue else null end) as Jun_Revenue,
+	sum(case when month = 'jul' then revenue else null end) as Jul_Revenue,
+	sum(case when month = 'aug' then revenue else null end) as Aug_Revenue,
+	sum(case when month = 'sep' then revenue else null end) as Sep_Revenue,
+	sum(case when month = 'oct' then revenue else null end) as Oct_Revenue,
+	sum(case when month = 'nov' then revenue else null end) as Nov_Revenue,
+	sum(case when month = 'dec' then revenue else null end) as Dec_Revenue
+from department
+group by id
 order by id
 ```
-
-612. Shortest Distance in a Plane
-
-```sql
-select round(sqrt(power(p1.x-p2.x, 2)+power(p1.y-p2.y, 2)), 2) as shortest
-from point_2d p1, point_2d p2
-where p1.x <> p2.x or p1.y <> p2.y
-order by shortest
-limit 1
-```
-
-585. Investments in 2016
+1211. Queries Quality and Percentage
 
 ```sql
-select round(sum(TIV_2016), 2) as TIV_2016
-from insurance
-where
-TIV_2015 in (select TIV_2015 from insurance group by TIV_2015 having count(*) > 1)
-and (LAT, LON) in (select LAT, LON from insurance group by LAT, LON having count(*) = 1)
+SELECT query_name, 
+    ROUND(AVG(rating/position),2) as quality, 
+    ROUND(100.0*sum(if(rating<3, 1,0))/count(1),2) as poor_query_percentage
+FROM Queries 
+GROUP BY query_name;
 ```
-602. Friend Requests II: Who Has the Most Friends
+
+1251. Average Selling Price
+    
+```sql
+where u.purchase_date between p.start_date and p.end_date
+```
+
+1280. Students and Examinations
 
 ```sql
-select id, count(*) as num
-from
-    (select requester_id as id
-    from request_accepted
-    union all
-    select accepter_id
-    from request_accepted) a
-group by id
-order by num desc
-limit 1
+WITH tot as(
+    SELECT *
+    FROM Students, Subjects
+)
+SELECT
+      tot.student_id, tot.student_name, tot.subject_name,
+      COUNT(ex.student_id) as attended_exams
+FROM
+    tot LEFT JOIN Examinations ex 
+    ON tot.student_id = ex.student_id AND tot.subject_name = ex.subject_name
+GROUP BY
+        tot.student_id,
+        tot.student_name,
+        tot.subject_name
+ORDER BY student_id, subject_name
 ```
 
-580. Count Student Number in Departments
-
-```sql
-select dept_name,
-ifnull(count(distinct student_id), 0) as student_number
-from department d
-left join student s
-on d.dept_id = s.dept_id
-group by d.dept_id
-order by student_number desc, dept_name
-```
-574. Winning Candidate
-
-```sql
-select Name
-from Candidate c
-join
-    (
-    select CandidateId, count(*) as cnt
-    from Vote
-    group by CandidateId
-    order by cnt desc
-    limit 1
-    ) a
-on c.id = a.CandidateId
-```
-
-578. Get Highest Answer Rate Question
+1327. List the Products Ordered in a Period
 
 ```sql
 select question_id as survey_log
