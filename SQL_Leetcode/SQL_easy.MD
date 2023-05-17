@@ -78,83 +78,91 @@ left join Bonus b
 on e.empId = b.empId
 where bonus is null or bonus < 1000
 ```
-607. Sales Person
+584. Sales Person
 
 ```sql
-select name
-from salesperson
-where sales_id not in
-    (
-    select sales_id
-    from orders o
-    join company c
-    on o.com_id = c.com_id
-    where c.name = 'RED'
-    )
+SELECT
+    cus.name
+FROM 
+    Customer AS cus
+WHERE
+    cus.referee_id != 2 OR
+    cus.referee_id IS NULL
 ```
 
-597. Friend Requests I: Overall Acceptance Rate
+586. Customer placing the largest number of orders
 
 ```sql
-select round(
-ifnull(
-(select count(*) from (select distinct requester_id, accepter_id from request_accepted) a)
-/
-(select count(*) from (select distinct sender_id, send_to_id from friend_request) b)
-, 0)
-, 2) as accept_rate
+Select customer_number from Orders o
+group by Customer_number
+order by count(customer_number) desc limit 1;
+```
+
+595. Big Countries
+
+```sql
+select name, population, area from World
+having area >= 3000000 OR population >= 25000000;
+```
+
+596. Classes More Than 5 Students
+
+```sql
+select class 
+from courses 
+group by class 
+having count(distinct student)>=5;
+```
+
+607. Sales person
+
+```sql
+SELECT
+    s.name
+FROM
+    salesperson s
+WHERE
+    s.sales_id NOT IN (SELECT
+            o.sales_id
+        FROM
+            orders o
+                LEFT JOIN
+            company c ON o.com_id = c.com_id
+        WHERE
+            c.name = 'RED')
+;        
+```
+
+610. Triangle Judgement
+
+```sql
+SELECT x,y,z, 
+    (CASE
+        WHEN x + y > z AND y + z > x AND x + z > y THEN "Yes"
+        ELSE "No"
+        END) AS triangle
+FROM Triangle;
 ```
 
 619. Biggest Single Number
 
 ```sql
-select max(num) as num
-from (
-select num
-from number
-group by num
-having count(*) = 1
-) a
+SELECT MAX(num) AS num
+FROM  (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+) AS A;
 ```
 
-182. Duplicate Emails
+620. Not Boring Movies
 
 ```sql
--- Write your MySQL query statement below
-SELECT Email FROM Person 
-GROUP BY Email 
-HAVING COUNT(Email)>1
-```
-
-175. Combine Two Tables
-
-```sql
--- Write your MySQL query statement below
-SELECT Person.FirstName, 
-Person.LastName, 
-Address.City, 
-Address.State 
-from Person 
-LEFT JOIN Address 
-on Person.PersonId = Address.PersonId;
-```
-
-181. Employees Earning More Than Their Managers
-
-```sql
--- Write your MySQL query statement below
-select e1.name as Employee
-from Employee e1, Employee e2
-where e1.ManagerId = e2.Id and e1.Salary > e2.Salary;
-```
-
-183. Customers Who Never Order
-
-```sql
--- Write your MySQL query statement below
-select Name as Customers
-from Customers
-where Id not in (select CustomerId from Orders);
+select *
+from cinema
+where mod(id, 2) = 1 and description != 'boring'
+order by rating DESC;
 ```
 
 197. Rising Temperature
