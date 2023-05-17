@@ -52,7 +52,7 @@
 | 1731. The Number of Employees Which Report to Each Employee | [link](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/) |
 | 1741. Find Total Time Spent by Each Employee | [link](https://leetcode.com/problems/find-total-time-spent-by-each-employee/) |
 | 1757. Recyclable and Low Fat Products | [link](https://leetcode.com/problems/recyclable-and-low-fat-products/) |
-| 1789. Primary Department for Each Employee | https://leetcode.com/problems/primary-department-for-each-employee |
+| 1789. Primary Department for Each Employee | [link](https://leetcode.com/problems/primary-department-for-each-employee) |
 | 1795. Rearrange Products Table | [link](https://leetcode.com/problems/rearrange-products-table/   ) |
 | 1873. Calculate Special Bonus | [link](https://leetcode.com/problems/calculate-special-bonus/) |
 | 1890. The Latest Login in 2020 | [link](https://leetcode.com/problems/the-latest-login-in-2020/) |
