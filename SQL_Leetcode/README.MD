@@ -1,4 +1,4 @@
-| Leetcode      | Description | Additional |
+| Leetcode      | Description | Author |
 | ----------- | ----------- | ------------ |
 | [Easy 🟩](https://leetcode.com/problemset/database/) | Solved Nums | `Alex Myn` |
 | [Medium  🟨](https://leetcode.com/problemset/database/)  | Solved Nums | `16/05/23` |
@@ -28,7 +28,7 @@
 | 1068. Product Sales Analysis I | [link](https://leetcode.com/problems/product-sales-analysis-i/) |
 | 1075. Project Employees I | [link](https://leetcode.com/problems/project-employees-i/) | 
 | 1084. Sales Analysis III | [link](https://leetcode.com/problems/sales-analysis-iii/) | 
-| 1141. User Activity for the Past 30 Days I | [link](1141. User Activity for the Past 30 Days I) |
+| 1141. User Activity for the Past 30 Days I | [link](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/) |
 | 1148. Article Views I | [link](https://leetcode.com/problems/article-views-i/) |
 | 1179. Reformat Department Table | [link](https://leetcode.com/problems/reformat-department-table/) |
 | 1211. Queries Quality and Percentage | [link](https://leetcode.com/problems/queries-quality-and-percentage/) |
