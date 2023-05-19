@@ -382,26 +382,16 @@ SELECT contest_id, (
 FROM Register
 GROUP BY contest_id
 ORDER BY 2 DESC, 1 ASC
-```
+``` 
 
 1661. Average Time of Process per Machine
 
 ```sql
-select e1.Id, e1.Month, sum(e2.Salary) as Salary
-from Employee e1, Employee e2
-where
-e1.Id = e2.Id
-and e1.Month - e2.Month >= 0
-and e1.Month - e2.Month < 3
-and (e1.Id, e1.Month) not in (select Id, max(Month) from Employee group by Id)
-group by e1.Id, e1.Month
-order by e1.Id, e1.Month desc
-```
-
-1661. Average Time of Process per Machine
-
-```sql
-Not done yet
+SELECT s.machine_id, ROUND(AVG(e.timestamp-s.timestamp), 3) AS processing_time
+FROM Activity s JOIN Activity e ON
+    s.machine_id = e.machine_id AND s.process_id = e.process_id AND
+    s.activity_type = 'start' AND e.activity_type = 'end'
+GROUP BY s.machine_id;
 ```
 
 1667. Fix Names in a Table

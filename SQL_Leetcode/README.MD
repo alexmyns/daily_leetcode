@@ -6,7 +6,7 @@
     
 -----
     
-## <a href = 'https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_easy.MD'>SQL Hard question</a>
+## <a href = 'https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_easy.MD'>SQL EASY question</a>
 
 | Easy  🟩    | Description |
 | ----------- | ----------- |
@@ -47,7 +47,6 @@
 | 1587. Bank Account Summary II | [link](https://leetcode.com/problems/bank-account-summary-ii/) |
 | 1633. Percentage of Users Attended a Contest | [link](https://leetcode.com/problems/percentage-of-users-attended-a-contest/) |
 | 1661. Average Time of Process per Machine | [link](https://leetcode.com/problems/average-time-of-process-per-machine/) |
-| 1661. Average Time of Process per Machine | [link](https://leetcode.com/problems/average-time-of-process-per-machine/) |
 | 1667. Fix Names in a Table | [link](https://leetcode.com/problems/fix-names-in-a-table) |
 | 1683. Invalid Tweets | [link](https://leetcode.com/problems/invalid-tweets/) |
 | 1693. Daily Leads and Partners | [link](https://leetcode.com/problems/daily-leads-and-partners/) |
@@ -62,6 +61,14 @@
 | 1965. Employees With Missing Information | [link](https://leetcode.com/problems/employees-with-missing-information/) |
 | 1978. Employees Whose Manager Left the Company | [link](https://leetcode.com/problems/employees-whose-manager-left-the-company/) |
 | 2356. Number of Unique Subjects Taught by Each Teacher | [link](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/) |
+
+--------
+## <a href = 'https://github.com/alexmyns/daily_leetcode/blob/main/SQL_Leetcode/SQL_medium.MD'>SQL Medium question</a>
+
+| Medium 🟨    | Description |
+|------------ | -------------|
+|  |  |
+
 
 
 --------
