@@ -67,7 +67,22 @@
 
 | Medium 🟨    | Description |
 |------------ | -------------|
-|  |  |
+| 176. Second Highest Salary | [link](https://leetcode.com/problems/second-highest-salary/) |
+| 177. Nth Highest Salary | [link](https://leetcode.com/problems/nth-highest-salary/) |
+| 178. Rank Scores | [link](https://leetcode.com/problems/rank-scores/) |
+| 180. Consecutive Numbers | [link](https://leetcode.com/problems/consecutive-numbers/) |
+| 184. Department Highest Salary | [link](https://leetcode.com/problems/department-highest-salary/) |
+| 550. Game Play Analysis IV | [link]() |
+| 570. Managers with at Least 5 Direct Reports | [link](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/) |
+| 585. Investments in 2016 | [link](https://leetcode.com/problems/investments-in-2016/) |
+| 602. Friend Requests II: Who Has the Most Friends | [link](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/) |
+| 608. Tree Node | [link](https://leetcode.com/problems/tree-node/) |
+| 626. Exchange Seats | [link](https://leetcode.com/problems/exchange-seats/) |
+| 1045. Customers Who Bought All Products | [link](https://leetcode.com/problems/customers-who-bought-all-products/) |
+| 1070. Product Sales Analysis III | [link](https://leetcode.com/problems/product-sales-analysis-iii/) |
+| 1158. Market Analysis I | [link](https://leetcode.com/problems/market-analysis-i/) |
+| 1164. Product Price at a Given Date | [link](https://leetcode.com/problems/product-price-at-a-given-date) |
+| 1174. Immediate Food Delivery II | [link](https://leetcode.com/problems/immediate-food-delivery-ii/) |
 
 
 
