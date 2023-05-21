@@ -52,7 +52,16 @@ select d.name as Department ,e.name as Employee,e.salary as Salary from Employee
 550. Game Play Analysis IV
 
 ```sql
-Not done yet
+WITH cte AS (
+SELECT player_id, MIN(event_date) as first_login
+FROM Activity
+GROUP BY player_id
+)
+
+SELECT ROUND(SUM(CASE WHEN DATEDIFF(event_date, first_login)=1 THEN 1 ELSE 0  END) / COUNT(DISTINCT cte.player_id), 2) as fraction
+FROM Activity as a
+JOIN cte 
+ON a.player_id = cte.player_id
 ```
 
 570. Managers with at Least 5 Direct Reports
@@ -115,14 +124,7 @@ case when mod(id,2)=0 then id-1
 when mod(id,2)=1 and id+1 not in (select id from seat) then id
 else id+1 end as id,
 student
-from seat order by id;
-
-
-select
-case when mod(id, 2) = 0 then id - 1
-when mod(id, 2) = 1 and id+1 not in (select id from seat) then id 
-else id + 1 end as id, student
-from seat order by id;
+from seat order by id
 ```
 
 1045. Customers Who Bought All Products
@@ -192,22 +194,99 @@ from base_table
 where ranking = 1 
 ```
 
+1204. Last Person to Fit in the Bus
+
 ```sql
+with cte as (SELECT person_name,weight,turn,SUM(weight) over (order by turn) as total from Queue)
+SELECT person_name
+FROM cte
+where total <= 1000
+order by total DESC
+LIMIT 1;
+```
+
+1321. Restaurant Growth
+
+```sql
+WITH TotalAmount AS (SELECT visited_on,
+sum(amount) as total
+FROM Customer
+GROUP BY visited_on)
+
+SELECT visited_on, amount, average_amount
+FROM (SELECT visited_on,
+sum(total) over(order by visited_on ASC rows between 6 preceding and current row) AS 'amount',
+round(avg(total) over(order by visited_on ASC rows between 6 preceding and current row), 2) AS 'average_amount'
+FROM TotalAmount) AS Temp
+WHERE DATE_SUB(visited_on, INTERVAL 6 DAY) IN (SELECT visited_on FROM TotalAmount)
+ORDER BY visited_on ASC
+```
+
+1341. Movie Rating
+
+```sql
+select name as results
+from (
+
+(select name,count(*) as num
+from movierating left join users
+on movierating.user_id = users.user_id
+group by movierating.user_id
+order by num desc, name limit 1 )
+
+union
+
+(select title,avg(rating) as rat
+from movierating left join movies
+on movierating.movie_id = movies.movie_id
+where month(created_at) = 2 and year(created_at) = 2020
+group by movierating.movie_id
+order by rat desc,title limit 1)
+) as a
+```
+
+1393. Capital Gain/Loss
+
+```sql
+SELECT
+    stock_name,
+    total_sell - total_buy as capital_gain_loss
+FROM (
+SELECT
+    stock_name,
+    SUM(CASE WHEN operation = 'Sell' THEN price ELSE 0 END) as total_sell,
+    SUM(CASE WHEN operation = 'Buy' THEN price ELSE 0 END ) as total_buy 
+FROM Stocks
+GROUP BY 1
+) x
 
 ```
 
-```sql
+1907. Count Salary Categories
 
+```sql
+select "Low Salary" as category, count(*) as accounts_count from Accounts where income < 20000
+union 
+select "Average Salary" as category, count(*) as accounts_count from Accounts where 20000 <= income and income <= 50000
+union
+select "High Salary" as category, count(*) as accounts_count from Accounts where 50000 < income
 ```
 
-```sql
-
-```
+1934. Confirmation Rate
 
 ```sql
+WITH rate_cte AS
+  (SELECT user_id,
+          ROUND(SUM(CASE
+                        WHEN action='confirmed' THEN 1
+                        ELSE 0
+                    END) / COUNT(*), 2) AS confirmation_rate
+   FROM Confirmations
+   GROUP BY user_id
+   ORDER BY NULL)
 
-```
-
-```sql
-
+SELECT s.user_id,
+       IFNULL(r.confirmation_rate, 0) AS confirmation_rate
+FROM Signups s
+LEFT JOIN rate_cte r ON s.user_id = r.user_id;
 ```

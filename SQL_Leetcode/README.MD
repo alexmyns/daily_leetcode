@@ -72,7 +72,7 @@
 | 178. Rank Scores | [link](https://leetcode.com/problems/rank-scores/) |
 | 180. Consecutive Numbers | [link](https://leetcode.com/problems/consecutive-numbers/) |
 | 184. Department Highest Salary | [link](https://leetcode.com/problems/department-highest-salary/) |
-| 550. Game Play Analysis IV | [link]() |
+| 550. Game Play Analysis IV | [link](https://leetcode.com/problems/game-play-analysis-iv/) |
 | 570. Managers with at Least 5 Direct Reports | [link](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/) |
 | 585. Investments in 2016 | [link](https://leetcode.com/problems/investments-in-2016/) |
 | 602. Friend Requests II: Who Has the Most Friends | [link](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/) |
@@ -83,6 +83,12 @@
 | 1158. Market Analysis I | [link](https://leetcode.com/problems/market-analysis-i/) |
 | 1164. Product Price at a Given Date | [link](https://leetcode.com/problems/product-price-at-a-given-date) |
 | 1174. Immediate Food Delivery II | [link](https://leetcode.com/problems/immediate-food-delivery-ii/) |
+| 1204. Last Person to Fit in the Bus | [link]() |
+| 1321. Restaurant Growth | [link](https://leetcode.com/problems/restaurant-growth/) |
+| 1341. Movie Rating | [link](https://leetcode.com/problems/movie-rating/) |
+| 1393. Capital Gain/Loss | [link](https://leetcode.com/problems/capital-gainloss/) |
+| 1907. Count Salary Categories | [link](https://leetcode.com/problems/count-salary-categories/) |
+| 1934. Confirmation Rate | [link](https://leetcode.com/problems/confirmation-rate/) |
 
 
 
